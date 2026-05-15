@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Translation, hospitalityClients } from '../data/content';
 import { CheckCircle2, Target, Eye, Award, Settings } from 'lucide-react';
-import { span } from 'framer-motion/m';
-
 interface AboutProps {
   t: Translation;
   currentLang: 'en' | 'ar' | 'fr';
