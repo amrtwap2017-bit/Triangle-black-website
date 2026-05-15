@@ -133,7 +133,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 style={{
                   strokeDasharray: 300,
                   strokeDashoffset: 300,
-                  animation: 'dashAnim 2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                  animation: 'dashAnim 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                 }}
               />
 
@@ -147,7 +147,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 style={{
                   opacity: 0,
                   transformOrigin: '40px 40px',
-                  animation: 'innerTriangleFade 1s ease forwards 1.5s',
+                  animation: 'innerTriangleFade 1.8s ease forwards 3s',
                 }}
               />
 
@@ -165,13 +165,13 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
               {/* Corner accent dots */}
               <circle cx="40" cy="6" r="1.2" fill="#F4B942" opacity="0"
-                style={{ animation: 'innerTriangleFade 0.5s ease forwards 1.8s' }}
+                style={{ animation: 'innerTriangleFade 0.8s ease forwards 1.8s' }}
               />
-              <circle cx="74" cy="66" r="1.2" fill="#F4B942" opacity="0"
-                style={{ animation: 'innerTriangleFade 0.5s ease forwards 1.9s' }}
+              <circle cx="40" cy="42" r="1.5" fill="#C6A15B" opacity="0"
+                style={{ animation: 'innerTriangleFade 1s ease forwards 3.5s' }}
               />
               <circle cx="6" cy="66" r="1.2" fill="#F4B942" opacity="0"
-                style={{ animation: 'innerTriangleFade 0.5s ease forwards 2s' }}
+                style={{ animation: 'innerTriangleFade 0.8s ease forwards 2s' }}
               />
             </svg>
 

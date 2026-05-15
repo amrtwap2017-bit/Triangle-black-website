@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { translations, Lang } from './data/content';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Navbar } from './components/Navbar';
@@ -18,7 +18,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [initialLoading, setInitialLoading] = useState(true);
   const [prefilledService, setPrefilledService] = useState('');
-
   const t = translations[currentLang];
 
   // ═══════════════════════ HTML DIR & LANG ═══════════════════════
@@ -29,36 +28,53 @@ export default function App() {
   }, [currentLang]);
 
   // ═══════════════════════ SCROLL TRACKING ═══════════════════════
+  const tickingRef = useRef(false);
+  const updateActiveSection = useCallback(() => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;  
+
+    // Calculate how far down the page (0 to 1)
+    const scrollProgress = scrollY / (documentHeight - windowHeight);
+
+    // This allows CSS to know scroll position for effects
+    document.documentElement.style.setProperty(
+      '--scroll-progress',
+      scrollProgress.toString()
+    );
+
+    // Add class to navbar when user scrolls down
+    if (scrollY > 80) {
+      document.documentElement.classList.add('scrolled');
+    } else {
+      document.documentElement.classList.remove('scrolled');
+    }
+
+    // Find all sections and animate them in when visible
+    const sections = document.querySelectorAll('[data-section]');
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const offset = windowHeight * 0.85;
+
+      if (rect.top <= offset) {
+        section.classList.add('is-visible');
+      }
+    });
+
+    tickingRef.current = false;}, []);
+
+  const handleScroll = useCallback(() => {
+    if (!tickingRef.current) {
+      window.requestAnimationFrame(updateActiveSection);
+      tickingRef.current = true;
+    }
+  }, [updateActiveSection]);
+
   useEffect(() => {
-    let ticking = false;
-    const sections = ['home', 'about', 'services', 'projects', 'contact'];
-
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 250;
-
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < bottom) {
-          setActiveTab(id);
-          break;
-        }
-      }
-      ticking = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateActiveSection);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   // ═══════════════════════ NAV HANDLER ═══════════════════════
   const handleSetTab = useCallback((tabId: string) => {
