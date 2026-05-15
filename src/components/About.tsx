@@ -189,22 +189,46 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
             className="space-y-6 pt-2"
           >
             {/* Subheading */}
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold leading-[1.1] text-white">
-              Building the Backbone of{' '}
-              <span
-                className="italic"
-                style={{
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Extraordinary
-              </span>{' '}
-              Experiences
+            <h3 
+              className={`font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-[1.2] text-white ${isRtl ? 'text-right' : 'text-left'}`} 
+              dir={isRtl ? 'rtl' : 'ltr'}
+            >
+              {isRtl ? (
+                <>
+                  نبني الركيزة الأساسية{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      display: 'inline',
+                      fontStyle: 'normal'
+                    }}
+                  >
+                    لخلق تجارب استثنائية
+                  </span>
+                </>
+              ) : (
+                <>
+                  Building the Backbone of{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      display: 'inline',
+                      fontStyle: 'italic'
+                    }}
+                  >
+                    Extraordinary Experiences
+                  </span>
+                </>
+              )}
             </h3>
-
             {/* Paragraphs */}
             <div className="space-y-5 text-neutral-400 font-light leading-relaxed text-sm sm:text-base">
               <p className="border-l-2 border-[#d4af37] pl-4 py-1 text-white/80 font-medium text-sm">

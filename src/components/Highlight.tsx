@@ -86,7 +86,7 @@ export const Highlight: React.FC<HighlightProps> = ({ t, currentLang }) => {
             className="text-white/40 text-sm sm:text-base font-light leading-relaxed max-w-xl mt-4"
           >
             {t.highlight.desc}
-          </motion.p>
+          </motion.p> 
         </div>
 
         {/* ══════════════════════════════════════ */}
@@ -164,7 +164,7 @@ export const Highlight: React.FC<HighlightProps> = ({ t, currentLang }) => {
                                      text-[#d4af37]/70 mb-2 font-mono">
                         {item.title}
                       </h4>
-                      <p className="text-[11px] text-neutral-400 leading-relaxed font-light">
+                      <p className="text-[11px] text-neutral-400 leading-relaxed font-light transition-all duration-500 ease-out hover:scale-105 hover:text-white hover:drop-shadow-[0_4px_12px_rgba(212,175,55,0.3)] transform-gpu cursor-default">
                         {item.description}
                       </p>
                     </div>
@@ -231,7 +231,7 @@ export const Highlight: React.FC<HighlightProps> = ({ t, currentLang }) => {
                     {item.title}
                   </h4>
 
-                  <p className="text-[11px] text-neutral-400 leading-relaxed font-light">
+                  <p className="text-[12px] text-neutral-400 leading-relaxed font-light transition-all duration-500 ease-out hover:scale-105 hover:text-white hover:drop-shadow-[0_4px_12px_rgba(212,175,55,0.3)] transform-gpu cursor-default">
                     {item.description}
                   </p>
                 </div>

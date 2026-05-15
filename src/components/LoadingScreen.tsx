@@ -1,77 +1,122 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/Logo.png';
-
 interface LoadingScreenProps {
-  onFinish: () => void;
+  onComplete: () => void;
 }
-
-export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
+export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [fading, setFading] = useState(false);
-
+  const [fadeOut, setFadeOut] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           setTimeout(() => {
-            setFading(true);
-            setTimeout(() => onFinish(), 600);
+            setFadeOut(true);
+            setTimeout(onComplete, 600);
           }, 300);
           return 100;
         }
-        // Speed up the simulation randomly for an engaging experience
-        const increment = Math.floor(Math.random() * 15) + 8;
+        const increment = prev < 60 ? 3 : prev < 85 ? 2 : 1;
         return Math.min(prev + increment, 100);
       });
-    }, 100);
-
+    }, 30);
     return () => clearInterval(interval);
-  }, [onFinish]);
-
+  }, [onComplete]);
   return (
-    <div 
-      className={`fixed inset-0 z-60 flex flex-col items-center justify-center bg-black transition-opacity duration-700 ease-out ${
-        fading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+    <div
+      className={`fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-600 ${
+        fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Background premium decorative gradient lines */}
-      
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08),transparent_70%)] pointer-events-none" />
-      
-      <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
-        {/* Dynamic logo icon */}
-        <div className="relative mb-10 flex items-center justify-center">
-          <div className="absolute w-28 h-28 border border-[#d4af37]/20 rounded-full animate-pulse" />
-          <div className="absolute w-36 h-36 border border-[#d4af37]/10 rounded-full animate-ping duration-1000" />
-          <div className="absolute w-24 h-24 sm:w-28 sm:h-28 bg-[#d4af37]/5 rounded-full blur-md" />
+      {/* Decorative gradient lines */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-[#d4af37]/15 to-transparent" />
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#d4af37]/10 to-transparent" />
+        <div className="absolute top-[20%] left-0 w-full h-px bg-gradient-to-r from-transparent via-white/3 to-transparent" />
+        <div className="absolute top-[80%] left-0 w-full h-px bg-gradient-to-r from-transparent via-white/3 to-transparent" />
+      </div>
+      <div className="relative flex flex-col items-center gap-8 px-8">
+        {/* Animated Triangle Logo */}
+        <div className="relative w-20 h-20">
+          {/* Outer glow ring */}
+          <div className="absolute inset-0 rounded-full bg-[#d4af37]/5 blur-3xl scale-[2] animate-pulse" />
+          
+          {/* Logo image centered */}
           <img
             src={logo}
-            alt="Company logo"
-            className="relative z-10 w-auto h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 object-contain select-none transition-all duration-300 hover:scale-105 hover:brightness-110 drop-shadow-[0_0_25px_rgba(212,175,55,0.25)]"
+            alt="logo"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20
+                      w-20 h-20
+                      transition-all duration-500
+                      group-hover:scale-105 group-hover:brightness-110
+                      drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]
+                      group-hover:drop-shadow-[0_0_35px_rgba(212,175,55,0.45)]"
           />
+          
+          {/* SVG Triangle with animation */}
+          <svg
+            viewBox="0 0 80 80"
+            className="absolute inset-0 w-20 h-20 z-30 pointer-events-none"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          > 
+            {/* Outer triangle */}
+            <polygon
+              points="40,6 74,66 6,66"
+              stroke="#d4af37"
+              strokeWidth="2"
+              fill="none"
+              style={{ 
+                strokeDasharray: 200, 
+                strokeDashoffset: 200, 
+                animation: 'dashAnim 1.5s ease forwards' 
+              }}
+            />
+            {/* Inner triangle */}
+            <polygon
+              points="40,20 62,58 18,58"
+              stroke="#d4af37"
+              strokeWidth="0.8"
+              fill="none"
+              opacity="0.4"
+            />
+          </svg>
+          
+          <style>{`
+            @keyframes dashAnim {
+              to { stroke-dashoffset: 0; }
+            }
+          `}</style>
+        </div>        {/* Brand Name */}
+        <div className="text-center space-y-1">
+          <h1
+            className="text-2xl sm:text-3xl font-bold tracking-[0.3em] text-[#d4af37] uppercase"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            TRIANGLE BLACK
+          </h1>
+          <div className="h-px bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent" />
+          <p className="text-[9px] sm:text-[10px] tracking-[0.35em] text-white/40 uppercase font-mono">
+            Hospitality Engineering Initialization
+          </p>
         </div>
-
-        <h2 className="text-2xl tracking-[0.3em] font-bold text-[#d4af37] font-serif uppercase mb-2">
-          TRIANGLE BLACK
-        </h2>
-        
-        <p className="text-xs uppercase tracking-widest text-neutral-400 mb-8 font-light">
-          Hospitality Engineering Initialization
-        </p>
-
-        {/* Progress bar */}
-        <div className="w-64 h-[2px] bg-neutral-900 rounded-full overflow-hidden relative mb-3">
-          <div 
-            className="h-full bg-gradient-to-r from-[#d4af37]/40 via-[#d4af37] to-[#ffe58f] transition-all duration-150 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        <div className="flex justify-between w-64 text-[10px] text-neutral-500 font-mono tracking-wider">
-          <span>SYSTEMS SECURED</span>
-          <span className="text-[#d4af37] font-semibold">{progress}%</span>
+        {/* Progress Bar */}
+        <div className="w-64 sm:w-80 space-y-2">
+          <div className="h-px bg-neutral-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-[#d4af37]/60 to-[#d4af37] rounded-full transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-[9px] text-[#d4af37]/60 uppercase tracking-widest font-mono">
+              SYSTEMS SECURED
+            </span>
+            <span className="text-[9px] text-[#d4af37] font-mono font-bold">
+              {progress}%
+            </span>
+          </div>
         </div>
       </div>
     </div>
