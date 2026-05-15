@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Translation, hospitalityClients } from '../data/content';
 import { CheckCircle2, Target, Eye, Award, Settings } from 'lucide-react';
+import { span } from 'framer-motion/m';
 
 interface AboutProps {
   t: Translation;
@@ -290,10 +291,47 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
               <span className="text-[11px] tracking-[0.3em] uppercase text-[#d4af37]/80 font-medium font-mono">
                 Our Values
               </span>
-              <div className="h-px w-8 bg-[#d4af37]/50" />
+              <div className="h-px w-8 bg-[#d4af37]/50 " />
             </div>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Principles That Define Us
+            <h3 
+              className={`font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.2] text-white ${isRtl ? 'text-right' : 'text-left flex items-center justify-center'}`}
+              dir={isRtl ? 'rtl' : 'ltr'}
+            >
+              {isRtl ? (
+                <>
+                  المبادئ التي {' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      display: 'inline',
+                      fontStyle: 'normal'
+                    }}
+                  >
+                    تحددنا
+                  </span>
+                </>
+              ) : (
+                <>
+                  Priciples That{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      display: 'inline',
+                      fontStyle: 'italic'
+                    }}
+                  >
+                    Define Us
+                  </span>
+                </>
+              )}
             </h3>
           </motion.div>
 
