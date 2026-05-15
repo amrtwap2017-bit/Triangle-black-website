@@ -23,7 +23,7 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ t, currentLang }
         <div className="w-80 bg-neutral-950 border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl mb-3 transition-all duration-300">
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#25D366] to-[#128C7E] p-4 text-black flex justify-between items-center">
+          <div className="bg-gradient-to-r from-[#b8942e] to-[#d4af37] p-4 text-black flex justify-between items-center">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm">
                 TB
@@ -55,7 +55,7 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ t, currentLang }
                 {t.whatsapp.welcomeMsg}
               </p>
               <div className="text-[8px] text-neutral-400 text-right mt-1 font-mono">
-                Now <Check className="w-2.5 h-2.5 inline text-[#25D366]" />
+                Now <Check className="w-2.5 h-2.5 inline text-[#b8942e]" />
               </div>
             </div>
 
@@ -68,7 +68,7 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ t, currentLang }
                 href={`https://wa.me/${targetNumber}?text=${encodedMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center w-full py-2 bg-[#25D366] text-black font-bold text-[11px] rounded-xl hover:opacity-95 transition-opacity flex items-center justify-center gap-1.5"
+                className="block text-center w-full py-2 bg-[#b8942e] text-black font-bold text-[11px] rounded-xl hover:opacity-95 transition-opacity flex items-center justify-center gap-1.5"
               >
                 <MessageCircle className="w-3.5 h-3.5 fill-black" />
                 <span>{t.whatsapp.launchBtn}</span>
@@ -87,10 +87,10 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ t, currentLang }
       {/* Main button */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-14 h-14 bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-black rounded-full flex items-center justify-center shadow-xl shadow-black/60 hover:scale-110 transition-transform duration-300 relative group focus:outline-none"
+        className="w-14 h-14 bg-gradient-to-tr from-[#b8942e] to-[#d4af37] text-black rounded-full flex items-center justify-center shadow-xl shadow-black/60 hover:scale-110 transition-transform duration-300 relative group focus:outline-none"
         aria-label="Contact on WhatsApp"
       >
-        <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
+        <span className="absolute inset-0 rounded-full bg-[#b8942e] opacity-30 animate-ping pointer-events-none" />
         
         {open ? (
           <X className="w-6 h-6 text-black transition-transform rotate-90" />
