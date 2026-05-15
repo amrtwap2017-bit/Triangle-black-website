@@ -191,7 +191,7 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
           >
             {/* Subheading */}
             <h3 
-              className={`font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-[1.2] text-white ${isRtl ? 'text-right' : 'text-left'}`} 
+              className={`font-serif ${isRtl ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-xl sm:text-2xl lg:text-3xl'} font-bold leading-[1.2] text-white ${isRtl ? 'text-right' : 'text-left'}`} 
               dir={isRtl ? 'rtl' : 'ltr'}
             >
               {isRtl ? (
@@ -221,9 +221,7 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
                       color: 'transparent',
-                      display: 'inline',
-                      fontStyle: 'italic'
-                    }}
+                      display: 'inline',}}
                   >
                     Extraordinary Experiences
                   </span>
@@ -325,7 +323,6 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
                       backgroundClip: 'text',
                       color: 'transparent',
                       display: 'inline',
-                      fontStyle: 'italic'
                     }}
                   >
                     Define Us
@@ -419,7 +416,7 @@ export const About: React.FC<AboutProps> = ({ t, currentLang }) => {
             {hospitalityClients.map((clientName: string, i: number) => (
               <span
                 key={i}
-                className="text-xs text-neutral-400 font-serif tracking-wider italic hover:text-[#d4af37]/70 transition-colors duration-300"
+                className="text-xs text-neutral-400 font-serif tracking-wider hover:text-[#d4af37]/70 transition-colors duration-300"
               >
                 {clientName}
               </span>
