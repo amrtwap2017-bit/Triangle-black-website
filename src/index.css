@@ -28,38 +28,243 @@
 }
 /* Custom animations */
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% { background-position: -300% 0; }
+  100% { background-position: 300% 0; }
 }
+
+/* --- Float (Cinematic Breathing) --- */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+    filter: drop-shadow(0 0 8px rgba(198, 161, 91, 0.3));
+  }
+  50% { 
+    transform: translateY(-14px) scale(1.01); 
+    filter: drop-shadow(0 0 20px rgba(198, 161, 91, 0.6));
+  }
 }
+
+/* --- Gold Pulse (Luxury Heartbeat) --- */
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-  50% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 0 rgba(198, 161, 91, 0.5),
+      0 0 0 0 rgba(244, 185, 66, 0.2),
+      inset 0 0 20px rgba(198, 161, 91, 0.05);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 16px rgba(198, 161, 91, 0),
+      0 0 0 32px rgba(244, 185, 66, 0),
+      inset 0 0 40px rgba(198, 161, 91, 0.1);
+  }
 }
+
+/* --- Grain (Film Texture Overlay) --- */
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3%, -8%) rotate(0.5deg); }
+  20% { transform: translate(-12%, 4%) rotate(-0.3deg); }
+  30% { transform: translate(5%, -20%) rotate(0.8deg); }
+  40% { transform: translate(-4%, 18%) rotate(-0.5deg); }
+  50% { transform: translate(-10%, 8%) rotate(0.2deg); }
+  60% { transform: translate(12%, 0%) rotate(-0.7deg); }
+  70% { transform: translate(0%, 12%) rotate(0.4deg); }
+  80% { transform: translate(2%, 28%) rotate(-0.3deg); }
+  90% { transform: translate(-8%, 8%) rotate(0.6deg); }
 }
+
+/* --- Logo Triangle Dash Draw --- */
+@keyframes dashAnim {
+  0% { stroke-dashoffset: 300; opacity: 0; }
+  20% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* --- Inner Triangle Fade + Rotate --- */
+@keyframes innerTriangleFade {
+  0% { opacity: 0; transform: rotate(-5deg) scale(0.9); }
+  100% { opacity: 0.5; transform: rotate(0deg) scale(1); }
+}
+
+/* --- Gold Glow Rotate (for symbol orbit effect) --- */
+@keyframes orbitGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Cinematic Reveal (fade + rise) --- */
+@keyframes cinematicReveal {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.97); 
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0px) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* --- Text Char Reveal --- */
+@keyframes charReveal {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px) skewX(-5deg);
+    filter: blur(4px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0px) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+/* --- Gold Line Expand --- */
+@keyframes lineExpand {
+  0% { transform: scaleX(0); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+/* --- Ambient Particle Float --- */
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px); 
+    opacity: 0.3;
+  }
+  33% { 
+    transform: translateY(-20px) translateX(8px); 
+    opacity: 0.8;
+  }
+  66% { 
+    transform: translateY(-10px) translateX(-6px); 
+    opacity: 0.5;
+  }
+}
+
+/* --- Glow Breathe (for borders/outlines) --- */
+@keyframes glowBreathe {
+  0%, 100% { 
+    opacity: 0.4;
+    filter: drop-shadow(0 0 4px rgba(198, 161, 91, 0.4));
+  }
+  50% { 
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(198, 161, 91, 0.9));
+  }
+}
+
+/* --- Scan Line (tech/cinematic effect) --- */
+@keyframes scanLine {
+  0% { transform: translateY(-100%); opacity: 0.6; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* --- Number Count Up Feel --- */
+@keyframes countUp {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0%); opacity: 1; }
+}
+
+/* --- Card Hover Lift --- */
+@keyframes cardLift {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-8px) scale(1.02); }
+}
+
 .animate-shimmer {
-  animation: shimmer 3s ease-in-out infinite;
-  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+  background-size: 300% 100%;
 }
+
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 7s ease-in-out infinite;
 }
+
 .animate-pulse-gold {
-  animation: pulse-gold 2s ease-in-out infinite;
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+.animate-grain {
+  animation: grain 8s steps(10) infinite;
+}
+
+.animate-cinematic-reveal {
+  animation: cinematicReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-line-expand {
+  animation: lineExpand 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left center;
+}
+
+.animate-glow-breathe {
+  animation: glowBreathe 3s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbitGlow 8s linear infinite;
+}
+
+.animate-particle {
+  animation: particleFloat 6s ease-in-out infinite;
+}
+/* --- Stagger delay utilities --- */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-1000 { animation-delay: 1s; }
+.delay-1200 { animation-delay: 1.2s; }
+
+/* --- Hover transitions (add to interactive elements) --- */
+.luxury-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-hover:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 12px 24px rgba(198, 161, 91, 0.25));
+}
+
+/* --- Gold border glow on hover --- */
+.gold-border-hover {
+  border: 1px solid rgba(198, 161, 91, 0.2);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gold-border-hover:hover {
+  border-color: rgba(198, 161, 91, 0.7);
+  box-shadow: 
+    0 0 20px rgba(198, 161, 91, 0.15),
+    inset 0 0 20px rgba(198, 161, 91, 0.05);
+}
+
+/* --- Scan line overlay (add to section backgrounds) --- */
+.scan-line-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(198, 161, 91, 0.6) 50%,
+    transparent 100%
+  );
+  animation: scanLine 6s linear infinite;
+  pointer-events: none;
 }
 /* Film grain texture overlay */
 .grain-overlay::before {

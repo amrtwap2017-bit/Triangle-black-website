@@ -55,6 +55,143 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           />
           
           {/* SVG Triangle with animation */}
+          <div className="relative w-20 h-20">
+
+            {/* --- Ambient outer glow ring --- */}
+            <div className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, rgba(198,161,91,0.12) 0%, transparent 70%)',
+                animation: 'pulse-gold 3s ease-in-out infinite',
+              }}
+            />
+
+            {/* --- Orbit ring (slow rotate) --- */}
+            <svg
+              viewBox="0 0 80 80"
+              className="absolute inset-0 w-20 h-20 pointer-events-none z-10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ animation: 'orbitGlow 12s linear infinite' }}
+            >
+              <circle
+                cx="40"
+                cy="40"
+                r="37"
+                stroke="#C6A15B"
+                strokeWidth="0.3"
+                strokeDasharray="4 6"
+                opacity="0.3"
+              />
+            </svg>
+
+            {/* --- Main SVG Triangle --- */}
+            <svg
+              viewBox="0 0 80 80"
+              className="absolute inset-0 w-20 h-20 z-30 pointer-events-none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Glow filter definition */}
+              <defs>
+                <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#F4B942" stopOpacity="1" />
+                  <stop offset="50%" stopColor="#C6A15B" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#d4af37" stopOpacity="0.7" />
+                </linearGradient>
+              </defs>
+
+              {/* Shadow/depth outer triangle */}
+              <polygon
+                points="40,6 74,66 6,66"
+                stroke="rgba(198,161,91,0.15)"
+                strokeWidth="4"
+                fill="none"
+                filter="url(#goldGlow)"
+              />
+
+              {/* Outer triangle — animated draw */}
+              <polygon
+                points="40,6 74,66 6,66"
+                stroke="url(#goldGrad)"
+                strokeWidth="1.8"
+                fill="none"
+                filter="url(#goldGlow)"
+                style={{
+                  strokeDasharray: 300,
+                  strokeDashoffset: 300,
+                  animation: 'dashAnim 2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                }}
+              />
+
+              {/* Inner triangle — fade in with delay */}
+              <polygon
+                points="40,20 62,58 18,58"
+                stroke="#C6A15B"
+                strokeWidth="0.6"
+                fill="none"
+                filter="url(#softGlow)"
+                style={{
+                  opacity: 0,
+                  transformOrigin: '40px 40px',
+                  animation: 'innerTriangleFade 1s ease forwards 1.5s',
+                }}
+              />
+
+              {/* Center dot — luxury accent */}
+              <circle
+                cx="40"
+                cy="42"
+                r="1.5"
+                fill="#C6A15B"
+                opacity="0"
+                style={{
+                  animation: 'innerTriangleFade 0.8s ease forwards 2s',
+                }}
+              />
+
+              {/* Corner accent dots */}
+              <circle cx="40" cy="6" r="1.2" fill="#F4B942" opacity="0"
+                style={{ animation: 'innerTriangleFade 0.5s ease forwards 1.8s' }}
+              />
+              <circle cx="74" cy="66" r="1.2" fill="#F4B942" opacity="0"
+                style={{ animation: 'innerTriangleFade 0.5s ease forwards 1.9s' }}
+              />
+              <circle cx="6" cy="66" r="1.2" fill="#F4B942" opacity="0"
+                style={{ animation: 'innerTriangleFade 0.5s ease forwards 2s' }}
+              />
+            </svg>
+
+            {/* --- Ambient particle dots --- */}
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 rounded-full pointer-events-none"
+                style={{
+                  background: '#C6A15B',
+                  top: `${[15, 70, 45][i]}%`,
+                  left: `${[10, 80, 50][i]}%`,
+                  opacity: 0.4,
+                  animation: `particleFloat ${5 + i * 2}s ease-in-out infinite`,
+                  animationDelay: `${i * 0.8}s`,
+                }}
+              />
+            ))}
+          </div>
+
           <svg
             viewBox="0 0 80 80"
             className="absolute inset-0 w-20 h-20 z-30 pointer-events-none"
