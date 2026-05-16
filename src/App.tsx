@@ -1,16 +1,46 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/700.css';
+import '@fontsource/cormorant-garamond/300-italic.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/600-italic.css';
+import '@fontsource/cormorant-garamond/700-italic.css';
+
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/700.css';
+// ────────────────────────────────────────────────────
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+import { useState, useRef, useCallback, useEffect, lazy, Suspense } from 'react'
 import { translations, Lang } from './data/content';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { Highlight } from './components/Highlight';
-import { About } from './components/About';
-import { Services } from './components/Services';
-import { Projects } from './components/Projects';
-import { Testimonials } from './components/Testimonials';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
-import { WhatsAppWidget } from './components/WhatsAppWidget';
+const Hero = lazy(() => import('./components/Hero').then(module => ({ default: module.Hero })));
+const Highlight = lazy(() => import('./components/Highlight').then(module => ({ default: module.Highlight })));
+const About = lazy(() => import('./components/About').then(module => ({ default: module.About })));
+const Services = lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
+const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
+const Testimonials = lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
+const Contact = lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
+const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
+const WhatsAppWidget = lazy(() => import('./components/WhatsAppWidget').then(module => ({ default: module.WhatsAppWidget })));
 
 export default function App() {
   // ═══════════════════════ STATE ═══════════════════════
@@ -117,7 +147,7 @@ export default function App() {
       />
 
       {/* MAIN CONTENT */}
-      <main>
+      <Suspense fallback={<div className='min-h-screen bg-black' />}><main>
         <Hero t={t} setActiveTab={handleSetTab} currentLang={currentLang} />
         <Highlight t={t} currentLang={currentLang} />
         <About t={t} currentLang={currentLang} />
@@ -125,7 +155,7 @@ export default function App() {
         <Projects t={t} currentLang={currentLang} />
         <Testimonials t={t} currentLang={currentLang} />
         <Contact t={t} currentLang={currentLang} prefilledService={prefilledService} />
-      </main>
+      </main></Suspense>
 
       {/* FOOTER */}
       <Footer t={t} currentLang={currentLang} setActiveTab={handleSetTab} />

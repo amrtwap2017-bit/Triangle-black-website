@@ -47,7 +47,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             src={logo}
             alt="logo"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20
-                      w-20 h-20
+                      w-22 h-22
                       transition-all duration-500
                       group-hover:scale-105 group-hover:brightness-110
                       drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]

@@ -3,8 +3,8 @@ import logo from '../assets/Logo.png';
 import { Translation } from '../data/content';
 import { Globe, Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 interface NavbarProps {
-  currentLang: 'en' | 'ar' | 'fr';
-  setLang: (lang: 'en' | 'ar' | 'fr') => void;
+  currentLang: 'en' | 'ar' | 'it';
+  setLang: (lang: 'en' | 'ar' | 'it') => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
   t: Translation;
@@ -56,10 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'contact',  label: t.nav.contact  },
   ];
   // ✅ FIX: Added `flag` property that was referenced in JSX but missing from the object
-  const languages: Record<'en' | 'ar' | 'fr', { label: string; flag: string }> = {
-    en: { label: 'English',  flag: '' },
-    ar: { label: 'العربية',  flag: '' },
-    fr: { label: 'Français', flag: '' },
+  const languages: Record<'en' | 'ar' | 'it', { label: string; flag: string }> = {
+    en: { label: 'English',  flag: '🇺🇸' },
+    ar: { label: 'العربية',  flag: '🇪🇬' },
+    it: { label: 'Italiano', flag: '🇮🇹' },
   };
   function handleNavClick(id: string) {
     setActiveTab(id);
@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       window.scrollTo({ top: sectionTop, behavior: 'smooth' });
     }
   }
-  function handleLangChange(lang: 'en' | 'ar' | 'fr') {
+  function handleLangChange(lang: 'en' | 'ar' | 'it') {
     setLang(lang);
     setLangDropdownOpen(false);
   }
@@ -208,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                             shadow-2xl shadow-black/60
                             overflow-hidden z-50"
               >
-                {(Object.keys(languages) as Array<'en' | 'ar' | 'fr'>).map((lang) => (
+                {(Object.keys(languages) as Array<'en' | 'ar' | 'it'>).map((lang) => (
                   <button
                     key={lang}
                     onClick={() => handleLangChange(lang)}
@@ -248,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                        ${isRTL ? 'tracking-normal' : 'tracking-[0.15em]'}`}
           >
             <span>Quote</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className={`${isRTL ? "rotate-180" : ""} w-3 h-3`} />
           </button>
           {/* Hamburger */}
           <button
@@ -327,7 +327,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                        transition-all duration-300 active:scale-95"
           >
             <span>Get a Quote</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className={`${isRTL ? "rotate-180" : ""} w-4 h-4`} />
           </button>
           {/* iOS safe area */}
           <div className="h-6" />
